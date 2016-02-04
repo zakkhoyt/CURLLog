@@ -65,3 +65,18 @@ You can simply copy/paste this into terminal to rerun the command. For convenien
 ```
 curl -X GET "http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41&APPID=4199a667b2597ff5b28f33ec06d6a31b" | python -m json.tool | pbcopy
 ```
+
+#### Usage
+Call one of the provided methos on CURLLog.sharedInstance. 
+
+For success with a return JSON payload call:
+
+```
+[[CURLLog sharedInstance] logCURLForTask:task data:data];
+```
+
+For an error call:
+
+```
+[[CURLLog sharedInstance] logCURLForTask:task error:error];
+```
