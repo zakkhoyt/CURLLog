@@ -60,7 +60,9 @@ Notice that the logged curl command from above:
 curl -X GET "http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41&APPID=4199a667b2597ff5b28f33ec06d6a31b"
 ```
 
-You can simply copy/paste this into terminal to rerun the command. For convenience the curl command is piped into some other commands to copy pretty json to your clipboard. This can be modified by setting the outputType variable on CURLLog.sharedInstance.
+You can paste this into terminal to rerun the command. You can also modify the request after you paste it. 
+
+For convenience the curl command is piped into some other commands to copy pretty json to your clipboard. This pipe command can be modified by setting the outputType variable on CURLLog.sharedInstance.
 
 ```
 curl -X GET "http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41&APPID=4199a667b2597ff5b28f33ec06d6a31b" | python -m json.tool | pbcopy
