@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CURLExample/CURLLog.m"
-            timestampString = "476313284.440471"
+            timestampString = "476313763.647346"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-printCURLRequest:responsePayload:statusCode:verbose:"
             landmarkType = "5">
          </BreakpointContent>

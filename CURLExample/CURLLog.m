@@ -135,6 +135,9 @@
 
 -(NSString*)stringFromOutputType:(CURLLogOutputType)outputType {
     switch (outputType) {
+        case CURLLogOutputTypeNone:
+            return @"";
+            break;
         case CURLLogOutputTypePretty:
             return @"python -m json.tool";
             break;

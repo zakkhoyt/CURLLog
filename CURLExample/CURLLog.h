@@ -13,6 +13,7 @@
 @interface CURLLog : NSObject
 
 typedef NS_ENUM(NSUInteger, CURLLogOutputType) {
+    CURLLogOutputTypeNone,
     CURLLogOutputTypePrettyPBCopy,
     CURLLogOutputTypePretty,
     CURLLogOutputTypePBCopy,
