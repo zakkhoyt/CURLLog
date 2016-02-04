@@ -76,10 +76,10 @@ CURLLog.h
 
 Next call one of the provided methods on CURLLog.sharedInstance. 
 
-For success with a return JSON payload call:
+For success with a return payload call:
 
 ```
-[[CURLLog sharedInstance] logCURLForTask:task data:data];
+[[CURLLog sharedInstance] logCURLForTask:task payload:data];
 ```
 
 For an error call:
