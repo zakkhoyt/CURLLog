@@ -156,9 +156,9 @@
     
     NSString *firstString = nil;
     if (statusCode.integerValue >= 200 && statusCode.integerValue < 300) {
-        firstString = [NSString stringWithFormat:@"\n**************** REST SUCCESS %@ **********************", statusCode];
+        firstString = [NSString stringWithFormat:@"\n**************** HTTP SUCCESS %@ **********************", statusCode];
     } else {
-        firstString = [NSString stringWithFormat:@"\n**************** REST ERROR %@ **********************", statusCode];
+        firstString = [NSString stringWithFormat:@"\n**************** HTTP ERROR %@ **********************", statusCode];
     }
     
     
@@ -184,9 +184,9 @@
     
     NSString *firstString = nil;
     if (statusCode.integerValue >= 200 && statusCode.integerValue < 300) {
-        firstString = [NSString stringWithFormat:@"\n**************** REST SUCCESS %@ **********************", statusCode];
+        firstString = [NSString stringWithFormat:@"\n**************** HTTP SUCCESS %@ **********************", statusCode];
     } else {
-        firstString = [NSString stringWithFormat:@"\n**************** REST ERROR %@ **********************", statusCode];
+        firstString = [NSString stringWithFormat:@"\n**************** HTTP ERROR %@ **********************", statusCode];
     }
     
     
@@ -212,9 +212,9 @@
     
     NSString *firstString = nil;
     if (statusCode.integerValue >= 200 && statusCode.integerValue < 300) {
-        firstString = [NSString stringWithFormat:@"\n**************** REST SUCCESS %@ **********************", statusCode];
+        firstString = [NSString stringWithFormat:@"\n**************** HTTP SUCCESS %@ **********************", statusCode];
     } else {
-        firstString = [NSString stringWithFormat:@"\n**************** REST ERROR %@ **********************", statusCode];
+        firstString = [NSString stringWithFormat:@"\n**************** HTTP ERROR %@ **********************", statusCode];
     }
     
     
