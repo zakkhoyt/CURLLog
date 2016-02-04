@@ -89,26 +89,15 @@ void handleURLSessionCallback(NSURLSessionTask * _Nullable task,  NSData * _Null
 }
 
 
-static NSString *ZHNYTKey = @"3b224e328771da446ab6c6c5a23c427b:13:73834071";
+
+static NSString *ZHWeatherKey = @"4199a667b2597ff5b28f33ec06d6a31b";
+
 -(NSString*)goodURLString {
-    return [NSString stringWithFormat:@"http://api.nytimes.com/svc/search/v2/articlesearch.json"
-            @"?q=new+york+times"
-            @"&page=%lu"
-            @"&sort=newest"
-            @"&api-key=%@",
-            (unsigned long)1,
-            ZHNYTKey];
+    return [NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41&APPID=%@", ZHWeatherKey];
 }
 
 -(NSString*)badURLString {
-    return [NSString stringWithFormat:@"http://api._TYPO_nytimes.com/svc/search/v2/articlesearch.json"
-            @"?q=new+york+times"
-            @"&page=%lu"
-            @"&sort=newest"
-            @"&api-key=%@",
-            (unsigned long)1,
-            ZHNYTKey];
-}
+    return [NSString stringWithFormat:@"http://api.op_TYPO__enweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41&APPID=%@", ZHWeatherKey];}
 
 
 @end
