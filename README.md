@@ -1,4 +1,4 @@
-# CURLLog
+### CURLLog - A tool to simplify web API development.
 
 A class which will convert you NSURLSessionTasks and NSURLConnections to curl command (printed to the console). This can accelerate development and debugging of API services and allows you to see what's actually going on. 
 
