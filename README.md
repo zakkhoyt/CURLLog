@@ -67,7 +67,14 @@ curl -X GET "http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.4
 ```
 
 #### Usage
-Call one of the provided methos on CURLLog.sharedInstance. 
+
+First import the header file:
+
+```
+CURLLog.h
+```
+
+Next call one of the provided methods on CURLLog.sharedInstance. 
 
 For success with a return JSON payload call:
 
@@ -80,3 +87,9 @@ For an error call:
 ```
 [[CURLLog sharedInstance] logCURLForTask:task error:error];
 ```
+
+#### Example project
+
+Clone this repo and open CURLExample.xcodeproj
+
+
