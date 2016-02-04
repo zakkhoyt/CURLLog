@@ -14,7 +14,7 @@
 
 #import "NSURLRequest+curl.h"
 
-@implementation NSURLRequest (AFCurlRequest)
+@implementation NSURLRequest (CURL)
 - (NSString*)curl {
     return [self curlVerbose:NO];
 }
