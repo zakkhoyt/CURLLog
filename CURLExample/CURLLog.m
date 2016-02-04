@@ -26,47 +26,90 @@
     return instance;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _outputType = CURLLogOutputTypePrettyPBCopy;
+    }
+    return self;
+}
 
 
-+(void)logCURLForTask:(NSURLSessionTask*)task {
+-(void)logCURLForTask:(NSURLSessionTask*)task {
     NSURLRequest *request = task.originalRequest;
     NSURLResponse *response = task.response;
     NSInteger statusCode = ((NSHTTPURLResponse*)response).statusCode;
-    [CURLLog printCURLRequest:request response:response statusCode:@(statusCode) verbose:NO];
+    [self printCURLRequest:request response:response statusCode:@(statusCode) verbose:NO];
 }
 
-+(void)logCURLForTask:(NSURLSessionTask*)task data:(NSData*)data{
+
+-(void)logCURLForTask:(NSURLSessionTask*)task payload:(id)payload {
+    
     
     NSURLRequest *request = task.originalRequest;
     NSURLResponse *response = task.response;
     NSInteger statusCode = ((NSHTTPURLResponse*)response).statusCode;
-    NSObject *responsePayload = [CURLLog objectForData:data];
-    [CURLLog printCURLRequest:request responsePayload:responsePayload statusCode:@(statusCode) verbose:NO];
+    
+    if([payload isKindOfClass:[NSData class]]) {
+        NSData *data = payload;
+        NSObject *responsePayload = [self objectForData:data];
+        [self printCURLRequest:request responsePayload:responsePayload statusCode:@(statusCode) verbose:NO];
+    } else if([payload isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dictionary = payload;
+        [self printCURLRequest:request responsePayload:dictionary statusCode:@(statusCode) verbose:NO];
+    } else if([payload isKindOfClass:[NSArray class]]) {
+        NSArray *array = payload;
+        [self printCURLRequest:request responsePayload:array statusCode:@(statusCode) verbose:NO];
+    } else if([payload isKindOfClass:[NSString class]]) {
+        NSArray *string = payload;
+        [self printCURLRequest:request responsePayload:string statusCode:@(statusCode) verbose:NO];
+    } else {
+        [self printCURLRequest:request response:response statusCode:@(statusCode) verbose:NO];
+    }
 }
 
-+(void)logCURLForTask:(NSURLSessionTask*)task error:(NSError*)error {
+
+
+-(void)logCURLForTask:(NSURLSessionTask*)task error:(NSError*)error {
     NSURLRequest *request = task.originalRequest;
     NSURLResponse *response = task.response;
     NSInteger statusCode = ((NSHTTPURLResponse*)response).statusCode;
-    [CURLLog printCURLRequest:request response:response error:error statusCode:@(statusCode) verbose:NO];
+    [self printCURLRequest:request response:response error:error statusCode:@(statusCode) verbose:NO];
     
 }
 
 
-+(void)logCURLRequest:(NSURLRequest*)request response:(NSURLResponse*)response {
+-(void)logCURLRequest:(NSURLRequest*)request response:(NSURLResponse*)response {
     NSInteger statusCode = ((NSHTTPURLResponse*)response).statusCode;
-    [CURLLog printCURLRequest:request response:response statusCode:@(statusCode) verbose:NO];
+    [self printCURLRequest:request response:response statusCode:@(statusCode) verbose:NO];
 }
 
-+(void)logCURLRequest:(NSURLRequest*)request response:(NSURLResponse*)response data:(NSData*)data {
+
+-(void)logCURLRequest:(NSURLRequest*)request response:(NSURLResponse*)response payload:(id)payload {
     NSInteger statusCode = ((NSHTTPURLResponse*)response).statusCode;
-    NSObject *responsePayload = [CURLLog objectForData:data];
-    [CURLLog printCURLRequest:request responsePayload:responsePayload statusCode:@(statusCode) verbose:NO];
+    
+    if([payload isKindOfClass:[NSData class]]) {
+        NSData *data = payload;
+        NSObject *responsePayload = [self objectForData:data];
+        [self printCURLRequest:request responsePayload:responsePayload statusCode:@(statusCode) verbose:NO];
+    } else if([payload isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dictionary = payload;
+        [self printCURLRequest:request responsePayload:dictionary statusCode:@(statusCode) verbose:NO];
+    } else if([payload isKindOfClass:[NSArray class]]) {
+        NSArray *array = payload;
+        [self printCURLRequest:request responsePayload:array statusCode:@(statusCode) verbose:NO];
+    } else if([payload isKindOfClass:[NSString class]]) {
+        NSArray *string = payload;
+        [self printCURLRequest:request responsePayload:string statusCode:@(statusCode) verbose:NO];
+    } else {
+        [self printCURLRequest:request response:response statusCode:@(statusCode) verbose:NO];
+    }
     
 }
-+(void)logCURLRequest:(NSURLRequest*)request response:(NSURLResponse*)response error:(NSError*)error {
+
+-(void)logCURLRequest:(NSURLRequest*)request response:(NSURLResponse*)response error:(NSError*)error {
     NSInteger statusCode = ((NSHTTPURLResponse*)response).statusCode;
-    [CURLLog printCURLRequest:request response:response error:error statusCode:@(statusCode) verbose:NO];
+    [self printCURLRequest:request response:response error:error statusCode:@(statusCode) verbose:NO];
     
 }
 
@@ -74,19 +117,23 @@
 
 #pragma mark Private
 
-+(NSObject*)objectForData:(NSData*)data {
+-(NSObject*)objectForData:(NSData*)data {
     // Attempt to unpack as JSON, else fall back to a UTF8 string
     NSError *jsonError = nil;
     id obj = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
     if(obj == nil)  {
         NSString *objString = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
-        return objString;
+        if(objString) {
+            return objString;
+        }
     } else {
         return obj;
     }
+    
+    return data;
 }
 
-+(NSString*)stringFromOutputType:(CURLLogOutputType)outputType {
+-(NSString*)stringFromOutputType:(CURLLogOutputType)outputType {
     switch (outputType) {
         case CURLLogOutputTypePretty:
             return @"python -m json.tool";
@@ -101,7 +148,7 @@
     }
 }
 
-+(void)printCURLRequest:(NSURLRequest*)request
+-(void)printCURLRequest:(NSURLRequest*)request
                response:(NSURLResponse*)response
              statusCode:(NSNumber*)statusCode
                 verbose:(BOOL)verbose {
@@ -114,22 +161,23 @@
         firstString = [NSString stringWithFormat:@"\n**************** REST ERROR %@ **********************", statusCode];
     }
     
-
+    
     NSLog(@"%@"
           @"\n**** REQUEST ****"
-          @"\n%@ | pbcopy"
+          @"\n%@ | %@"
           @"\n**** RESPONSE ****"
           @"\n%@"
           @"\n****************************************************",
           firstString,
           request.curl,
+          [self stringFromOutputType:_outputType],
           response.description ? response.description : @"");
 }
 
 
 
-+(void)printCURLRequest:(NSURLRequest*)request
-         responsePayload:(NSObject*)responsePayload
+-(void)printCURLRequest:(NSURLRequest*)request
+        responsePayload:(NSObject*)responsePayload
              statusCode:(NSNumber*)statusCode
                 verbose:(BOOL)verbose {
     
@@ -144,17 +192,18 @@
     
     NSLog(@"%@"
           @"\n**** REQUEST ****"
-          @"\n%@ | pbcopy"
+          @"\n%@ | %@"
           @"\n**** RESPONSE ****"
           @"\n%@"
           @"\n****************************************************",
           firstString,
           request.curl,
+          [self stringFromOutputType:_outputType],
           responsePayload);
 }
 
 
-+(void)printCURLRequest:(NSURLRequest*)request
+-(void)printCURLRequest:(NSURLRequest*)request
                response:(NSURLResponse*)response
                   error:(NSError*)error
              statusCode:(NSNumber*)statusCode
@@ -171,12 +220,13 @@
     
     NSLog(@"%@"
           @"\n**** REQUEST ****"
-          @"\n%@ | pbcopy"
+          @"\n%@ | %@"
           @"\n**** ERROR ****"
           @"\n%@"
           @"\n****************************************************",
           firstString,
           request.curl,
+          [self stringFromOutputType:_outputType],
           error.description);
 }
 @end

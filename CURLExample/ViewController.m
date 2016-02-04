@@ -74,17 +74,17 @@
 #pragma mark Helpers
 void handleURLConnectionCallback(NSURLRequest * _Nullable request, NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
     if (connectionError != nil) {
-        [CURLLog logCURLRequest:request response:response error:connectionError];
+        [[CURLLog sharedInstance] logCURLRequest:request response:response error:connectionError];
     } else {
-        [CURLLog logCURLRequest:request response:response data:data];
+        [[CURLLog sharedInstance] logCURLRequest:request response:response payload:data];
     }
 }
 
 void handleURLSessionCallback(NSURLSessionTask * _Nullable task,  NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
     if(error != nil) {
-        [CURLLog logCURLForTask:task error:error];
+        [[CURLLog sharedInstance] logCURLForTask:task error:error];
     } else {
-        [CURLLog logCURLForTask:task data:data];
+        [[CURLLog sharedInstance] logCURLForTask:task payload:data];
     }
 }
 
