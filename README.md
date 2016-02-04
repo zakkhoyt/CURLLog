@@ -6,7 +6,7 @@ For example logging a request to get the weather:
 
 ```
 2016-02-04 12:52:47.000 CURLExample[24182:590796] 
-**************** REST SUCCESS 200 **********************
+**************** HTTP SUCCESS 200 **********************
 **** REQUEST ****
 curl -X GET "http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.41&APPID=4199a667b2597ff5b28f33ec06d6a31b" | python -m json.tool | pbcopy
 **** RESPONSE ****
