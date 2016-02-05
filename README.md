@@ -76,18 +76,38 @@ First import the header file:
 #import "CURLLog.h"
 ```
 
-Next call one of the provided methods on CURLLog.sharedInstance. 
-
-For success with a return payload call:
+To log request and response together, call one of the provided methods on CURLLog.sharedInstance in the completion block. 
 
 ```
-[[CURLLog sharedInstance] logCURLForTask:task payload:data];
+NSURL *url = [NSURL URLWithString:<your url string>];
+NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+// Must use __block qualifier so that the task variable is still alive when we use it inside the completion handler.
+__block NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    if(error != nil) {
+        [[CURLLog sharedInstance] logCURLForTask:task error:error];
+    } else {
+        [[CURLLog sharedInstance] logCURLForTask:task payload:data];
+    }
+}];
+
+[task resume];
 ```
 
-For an error call:
+If you aren't concerned with the response then you can log outside of the completion handler (no __block required here).
 
 ```
-[[CURLLog sharedInstance] logCURLForTask:task error:error];
+NSURL *url = [NSURL URLWithString:<your url string>];
+NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    // handle your business...
+}];
+
+[[CURLLog sharedInstance] logCURLForTask:task];
+
+[task resume];
+
 ```
 
 #### Example project
