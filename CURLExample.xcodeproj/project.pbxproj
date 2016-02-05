@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C61CA45E1C63DF69006EA878 /* CURLLog.m in Sources */ = {isa = PBXBuildFile; fileRef = C61CA45D1C63DF69006EA878 /* CURLLog.m */; };
+		C61CA51A1C64570C006EA878 /* CURLLog.m in Sources */ = {isa = PBXBuildFile; fileRef = C61CA5191C64570C006EA878 /* CURLLog.m */; };
 		C6EEA54E1C613A3600ECDBF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EEA54D1C613A3600ECDBF6 /* main.m */; };
 		C6EEA5511C613A3600ECDBF6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EEA5501C613A3600ECDBF6 /* AppDelegate.m */; };
 		C6EEA5541C613A3600ECDBF6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6EEA5531C613A3600ECDBF6 /* ViewController.m */; };
@@ -37,8 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C61CA45C1C63DF69006EA878 /* CURLLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLLog.h; sourceTree = "<group>"; };
-		C61CA45D1C63DF69006EA878 /* CURLLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLLog.m; sourceTree = "<group>"; };
+		C61CA5181C64570C006EA878 /* CURLLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CURLLog.h; sourceTree = "<group>"; };
+		C61CA5191C64570C006EA878 /* CURLLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CURLLog.m; sourceTree = "<group>"; };
 		C6EEA5491C613A3600ECDBF6 /* CURLExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CURLExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6EEA54D1C613A3600ECDBF6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C6EEA54F1C613A3600ECDBF6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -150,10 +150,10 @@
 		C6EEA58B1C613A7C00ECDBF6 /* CURL */ = {
 			isa = PBXGroup;
 			children = (
+				C61CA5181C64570C006EA878 /* CURLLog.h */,
+				C61CA5191C64570C006EA878 /* CURLLog.m */,
 				C6EEA5851C613A7700ECDBF6 /* NSURLRequest+CURL.h */,
 				C6EEA5861C613A7700ECDBF6 /* NSURLRequest+CURL.m */,
-				C61CA45C1C63DF69006EA878 /* CURLLog.h */,
-				C61CA45D1C63DF69006EA878 /* CURLLog.m */,
 			);
 			name = CURL;
 			path = CURLExample;
@@ -290,8 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6EEA5891C613A7700ECDBF6 /* NSURLRequest+CURL.m in Sources */,
-				C61CA45E1C63DF69006EA878 /* CURLLog.m in Sources */,
 				C6EEA5541C613A3600ECDBF6 /* ViewController.m in Sources */,
+				C61CA51A1C64570C006EA878 /* CURLLog.m in Sources */,
 				C6EEA5511C613A3600ECDBF6 /* AppDelegate.m in Sources */,
 				C6EEA54E1C613A3600ECDBF6 /* main.m in Sources */,
 			);
