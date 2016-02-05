@@ -73,7 +73,7 @@ curl -X GET "http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.4
 First import the header file:
 
 ```
-CURLLog.h
+#import "CURLLog.h"
 ```
 
 Next call one of the provided methods on CURLLog.sharedInstance. 
