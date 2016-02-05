@@ -78,6 +78,8 @@ First import the header file:
 
 To log request and response together, call one of the provided methods on CURLLog.sharedInstance in the completion block. 
 
+##### Obj-C
+
 ```
 NSURL *url = [NSURL URLWithString:<your url string>];
 NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -94,7 +96,27 @@ __block NSURLSessionDataTask *task = [_session dataTaskWithRequest:request compl
 [task resume];
 ```
 
+##### Swift
+```
+let request = NSURLRequest(URL: url)
+
+var task: NSURLSessionTask? = nil
+
+task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, request: NSURLResponse?, error: NSError?) -> Void in
+    if let error = error {
+        CURLLog.sharedInstance().logCURLForTask(task, error: error)
+    } else {
+        CURLLog.sharedInstance().logCURLForTask(task, payload: data)
+    }
+})
+
+task?.resume()
+
+```
+
 If you aren't concerned with the response then you can log outside of the completion handler (no __block required here).
+
+##### Obj-C
 
 ```
 NSURL *url = [NSURL URLWithString:<your url string>];
@@ -110,8 +132,25 @@ NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHan
 
 ```
 
+##### Swift
+
+```
+let request = NSURLRequest(URL: url)
+
+var task: NSURLSessionTask? = nil
+
+task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, request: NSURLResponse?, error: NSError?) -> Void in
+    // Handle your business...
+})
+
+CURLLog.sharedInstance().logCURLForTask(task)
+
+task?.resume()
+
+```
+
 #### Example project
 
-Clone this repo and open CURLExample.xcodeproj
+Clone this repo and open CURLExample.xcodeproj which include a Swift example and Obj-C example. 
 
 
