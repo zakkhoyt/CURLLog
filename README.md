@@ -100,8 +100,8 @@ __block NSURLSessionDataTask *task = [_session dataTaskWithRequest:request compl
 ```
 let request = NSURLRequest(URL: url)
 
+// Must declare task as optional variable so that it can be captured by the closure
 var task: NSURLSessionTask? = nil
-
 task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, request: NSURLResponse?, error: NSError?) -> Void in
     if let error = error {
         CURLLog.sharedInstance().logCURLForTask(task, error: error)
@@ -137,9 +137,7 @@ NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHan
 ```
 let request = NSURLRequest(URL: url)
 
-var task: NSURLSessionTask? = nil
-
-task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, request: NSURLResponse?, error: NSError?) -> Void in
+let task = session.dataTaskWithRequest(request, completionHandler: { (data: NSData?, request: NSURLResponse?, error: NSError?) -> Void in
     // Handle your business...
 })
 
