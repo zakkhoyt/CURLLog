@@ -114,7 +114,7 @@ task?.resume()
 
 ```
 
-If you aren't concerned with the response then you can log outside of the completion handler (no __block required here).
+If you aren't concerned with the response then you can log outside of the completion handler.
 
 ##### Obj-C
 
