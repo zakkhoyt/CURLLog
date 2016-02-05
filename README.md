@@ -70,7 +70,7 @@ curl -X GET "http://api.openweathermap.org/data/2.5/weather?lat=37.78&lon=-122.4
 
 #### Usage
 
-First import the header file:
+First import the header file (to your bridging header if using Swift)
 
 ```
 #import "CURLLog.h"
