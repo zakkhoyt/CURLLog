@@ -12,7 +12,7 @@
 #define kCurlFlagRequest    @" -X %@ \"%@\""
 #define kCurlFlagData       @" -d '%@'"
 
-#import "NSURLRequest+curl.h"
+#import "NSURLRequest+CURL.h"
 
 @implementation NSURLRequest (CURL)
 - (NSString*)curl {
